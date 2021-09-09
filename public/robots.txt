@@ -1,3 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
+# 设置是否允许搜索引擎访问
 User-agent: *
 Disallow:
