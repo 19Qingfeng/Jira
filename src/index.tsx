@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { ProjectListScreen } from "./pages/project-list/index";
+import { ProjectListScreen } from "./pages/project-list";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
