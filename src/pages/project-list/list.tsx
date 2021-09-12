@@ -1,6 +1,6 @@
 import { UserProps } from "./search-panel";
 
-interface ListItem {
+export interface ListItem {
   id: string;
   name: string;
   personId: string;

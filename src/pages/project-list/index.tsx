@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { List } from "./list";
-import { SearchPanel } from "./search-panel";
+import { List, ListItem } from "./list";
+import { SearchPanel, UserProps } from "./search-panel";
 import { stringify } from "qs";
 import { cleanObj } from "pages/utils";
 import { useMount } from "../../hooks/useMount";
@@ -14,14 +14,14 @@ export interface SearchParams {
 const baseUrl = process.env.REACT_APP_API_URL;
 
 const ProjectListScreen = () => {
-  const [params, setParams] = useState({
+  const [params, setParams] = useState<SearchParams>({
     name: "",
     personId: "",
   });
-  const paramsDebounce = useDebounce(params);
+  const paramsDebounce = useDebounce<SearchParams>(params);
 
-  const [list, setLists] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [list, setLists] = useState<ListItem[]>([]);
+  const [users, setUsers] = useState<UserProps[]>([]);
 
   useMount(() => {
     fetch(`${baseUrl}/users`).then(async (res) => {
