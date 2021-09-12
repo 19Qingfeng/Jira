@@ -3,6 +3,8 @@ import { List } from './list'
 import { SearchPanel } from './search-panel'
 import { stringify } from 'qs'
 import { cleanObj } from 'pages/utils'
+import { useMount } from '../../hooks/useMount'
+import { useDebounce } from 'hooks/useDebounce'
 
 const baseUrl = process.env.REACT_APP_API_URL
 
@@ -11,18 +13,18 @@ const ProjectListScreen = () => {
     name: '',
     personId: '',
   })
+  const paramsDebounce = useDebounce(params)
 
   const [list, setLists] = useState([])
   const [users, setUsers] = useState([])
 
-
-  useEffect(() => {
+  useMount(() => {
     fetch(`${baseUrl}/users`).then(async res => {
       if (res.ok) {
         setUsers(await res.json())
       }
     })
-  }, [])
+  })
 
   useEffect(() => {
     fetch(`${baseUrl}/projects?${stringify(cleanObj(params))}`).then(async res => {
@@ -30,7 +32,7 @@ const ProjectListScreen = () => {
         setLists(await res.json())
       }
     })
-  }, [params])
+  }, [paramsDebounce])
 
   return <div>
     <List list={list} users={users}></List>
