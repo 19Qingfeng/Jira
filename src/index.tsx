@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import { ProjectListScreen } from "./pages/project-list";
+import { Login } from "./pages/login";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ProjectListScreen />
+    <Login />
   </React.StrictMode>,
   document.getElementById("root")
 );
