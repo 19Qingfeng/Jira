@@ -4,7 +4,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 const Login: React.FC = () => {
   const login = (username: string, password: string) => {
-    fetch(`${baseUrl}/login`, {
+    fetch(`${baseUrl}/register`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const Login: React.FC = () => {
         <label htmlFor="password">密码</label>
         <input type="text" id="password" />
       </div>
-      <button type="submit">登录</button>
+      <button type="submit">注册</button>
     </form>
   );
 };
