@@ -22,7 +22,8 @@ const AuthContext = React.createContext<AuthProviderProps | undefined>(
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<UserProps | null>(null);
 
-  const login = (info: UserLoginProps) => auth.login(info).then(setUser);
+  const login = (info: UserLoginProps) =>
+    auth.login(info).then((res) => setUser(res));
 
   const register = (info: UserLoginProps) => auth.register(info).then(setUser);
 

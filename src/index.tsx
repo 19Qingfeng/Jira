@@ -1,15 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // import "./index.css";
-import { ProjectListScreen } from "./pages/project-list";
-import { Login } from "./pages/login";
 import reportWebVitals from "./reportWebVitals";
 import { AppProviders } from "./context/auth-provider";
+import { App } from './app'
 
 ReactDOM.render(
   <React.StrictMode>
     <AppProviders>
-      <Login />
+      <App />
     </AppProviders>
   </React.StrictMode>,
   document.getElementById("root")

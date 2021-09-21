@@ -24,10 +24,11 @@ export const login = (data: { username: string; password: string }) => {
     .then(async (res) => {
       if (res.ok) {
         return handleUserResponse(await res.json());
+      } else {
+        return Promise.reject(res);
       }
-      return Promise.reject(await res.json());
     })
-    .catch((e) => e);
+    .catch((e) => Promise.reject(e));
 };
 
 export const register = (data: { username: string; password: string }) => {
@@ -42,9 +43,9 @@ export const register = (data: { username: string; password: string }) => {
       if (res.ok) {
         return handleUserResponse(await res.json());
       }
-      return Promise.reject(await res.json());
+      return Promise.reject(res);
     })
-    .catch((e) => e);
+    .catch((e) => Promise.reject(e));
 };
 
 export const logout = async () =>
