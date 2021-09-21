@@ -10,7 +10,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 export const http = async (
   endPoint: string,
-  { data, token, config }: HttpParams
+  { data, token, config }: HttpParams = {}
 ) => {
   const requestData = {
     method: "GET",
@@ -22,7 +22,7 @@ export const http = async (
   };
 
   if (requestData.method.toUpperCase() === "GET") {
-    endPoint += new URLSearchParams(data).toString();
+    endPoint += `?${new URLSearchParams(data).toString()}`;
   } else {
     requestData.body = JSON.stringify(data || {});
   }
@@ -35,7 +35,7 @@ export const http = async (
         return Promise.reject({ message: "请重新登录" });
       }
       if (res.ok) {
-        return res;
+        return await res.json();
       } else {
         return Promise.reject(res);
       }

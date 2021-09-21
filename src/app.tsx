@@ -1,5 +1,5 @@
 import { AuthenticatedApp } from "authenticated-app";
-import { useAuth } from "context";
+import { useAuth } from "./hooks/useAuth";
 import { UnAuthenticatedApp } from "unauthenticated-app";
 
 const App: React.FC = () => {

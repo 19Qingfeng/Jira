@@ -1,7 +1,8 @@
 import * as auth from "../auth-provider";
 import React, { useState } from "react";
 import { UserProps } from "pages/project-list/search-panel";
-import { useContext } from "react";
+import { http } from "pages/utils/http";
+import { useMount } from "hooks/useMount";
 
 interface UserLoginProps {
   username: string;
@@ -15,19 +16,36 @@ interface AuthProviderProps {
   user: UserProps | null;
 }
 
-const AuthContext = React.createContext<AuthProviderProps | undefined>(
+export const AuthContext = React.createContext<AuthProviderProps | undefined>(
   undefined
 );
+
+const bootstrapUser = async () => {
+  let user = null;
+  const token = auth.getToken();
+  if (token) {
+    // 发送请求验证一下
+    const responseData = await http("/me", {
+      token,
+    });
+    console.log(responseData, "responseData");
+    user = (responseData as any).user;
+  }
+  return user;
+};
 
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<UserProps | null>(null);
 
-  const login = (info: UserLoginProps) =>
-    auth.login(info).then((res) => setUser(res));
+  const login = (info: UserLoginProps) => auth.login(info).then(setUser);
 
   const register = (info: UserLoginProps) => auth.register(info).then(setUser);
 
   const logout = () => auth.logout().then(() => setUser(null));
+
+  useMount(() => {
+    bootstrapUser().then(setUser);
+  });
 
   return (
     <AuthContext.Provider
@@ -37,12 +55,4 @@ const AuthProvider: React.FC = ({ children }) => {
   );
 };
 
-const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("Auth Context must exist in AuthProvider!");
-  }
-  return { ...context };
-};
-
-export { useAuth, AuthProvider };
+export { AuthProvider };

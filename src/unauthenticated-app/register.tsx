@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth } from "context";
+import { useAuth } from "../hooks/useAuth";
 
 
 const Register: React.FC = () => {

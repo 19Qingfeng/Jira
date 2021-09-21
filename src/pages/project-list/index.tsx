@@ -5,13 +5,12 @@ import { stringify } from "qs";
 import { cleanObj } from "pages/utils";
 import { useMount } from "../../hooks/useMount";
 import { useDebounce } from "hooks/useDebounce";
+import { useHttp } from "hooks/useHttp";
 
 export interface SearchParams {
   name: string;
   personId: string;
 }
-
-const baseUrl = process.env.REACT_APP_API_URL;
 
 const ProjectListScreen = () => {
   const [params, setParams] = useState<SearchParams>({
@@ -22,23 +21,18 @@ const ProjectListScreen = () => {
 
   const [list, setLists] = useState<ListItem[]>([]);
   const [users, setUsers] = useState<UserProps[]>([]);
+  const client = useHttp();
 
   useMount(() => {
-    fetch(`${baseUrl}/users`).then(async (res) => {
-      if (res.ok) {
-        setUsers(await res.json());
-      }
-    });
+    client("/users")
+      .then()
+      .then(setUsers);
   });
 
   useEffect(() => {
-    fetch(`${baseUrl}/projects?${stringify(cleanObj(params))}`).then(
-      async (res) => {
-        if (res.ok) {
-          setLists(await res.json());
-        }
-      }
-    );
+    client("/projects", {
+      data: cleanObj(params),
+    }).then(setLists);
   }, [paramsDebounce]);
 
   return (

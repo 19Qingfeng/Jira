@@ -1,5 +1,6 @@
 // 鉴权相关provider数据
 
+import { useHttp } from "hooks/useHttp";
 import { UserProps } from "pages/project-list/search-panel";
 
 const localStorageKey = "__auth_provider_token__";

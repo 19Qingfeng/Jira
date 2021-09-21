@@ -1,8 +1,6 @@
 import React from "react";
 import { Button } from "antd";
-import { useAuth } from "context";
-
-const baseUrl = process.env.REACT_APP_API_URL;
+import { useAuth } from "../../hooks/useAuth";
 
 const Login: React.FC = () => {
   const auth = useAuth();
