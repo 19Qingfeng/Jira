@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+// import "./index.css";
 import { ProjectListScreen } from "./pages/project-list";
 import { Login } from "./pages/login";
 import reportWebVitals from "./reportWebVitals";
+import { AppProviders } from "./context/auth-provider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <AppProviders>
+      <Login />
+    </AppProviders>
   </React.StrictMode>,
   document.getElementById("root")
 );

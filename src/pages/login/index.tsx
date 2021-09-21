@@ -1,17 +1,17 @@
 import React from "react";
+import { Button } from "antd";
+import { useAuth } from "context";
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
 const Login: React.FC = () => {
-  const login = (username: string, password: string) => {
-    fetch(`${baseUrl}/register`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    }).then(async (res) => {});
-  };
+  const auth = useAuth();
+
+  const login = (username: string, password: string) =>
+    auth.login({
+      username,
+      password,
+    });
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     // HTMLFormElement.elements
@@ -24,6 +24,7 @@ const Login: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <Button>你好</Button>
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id="username" />
