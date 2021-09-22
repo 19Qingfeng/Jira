@@ -23,9 +23,7 @@ const ProjectListScreen = () => {
   const client = useHttp();
 
   useMount(() => {
-    client("/users")
-      .then()
-      .then(setUsers);
+    client("/users").then().then(setUsers);
   });
 
   useEffect(() => {
