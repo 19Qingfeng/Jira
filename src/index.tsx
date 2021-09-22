@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { AppProviders } from "./context/auth-provider";
 import { App } from './app'
+import "antd/dist/antd.less";
 
 ReactDOM.render(
   <React.StrictMode>

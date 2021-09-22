@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { List, ListItem } from "./list";
 import { SearchPanel, UserProps } from "./search-panel";
-import { stringify } from "qs";
 import { cleanObj } from "pages/utils";
 import { useMount } from "../../hooks/useMount";
 import { useDebounce } from "hooks/useDebounce";
