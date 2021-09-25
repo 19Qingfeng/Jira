@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../hooks/useAuth";
-import { Form, Button, Input } from 'antd'
+import { Form, Input } from 'antd'
+import { LongButton } from '.'
 
 
 const Register: React.FC = () => {
@@ -29,7 +30,7 @@ const Register: React.FC = () => {
       <Form.Item>
         <Input type="text" id="password" />
       </Form.Item>
-      <Button type="primary" htmlType="submit">注册</Button>
+      <LongButton type="primary" htmlType="submit">注册</LongButton>
     </Form>
   );
 };
