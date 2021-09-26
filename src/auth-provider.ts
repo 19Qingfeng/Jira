@@ -1,13 +1,12 @@
 // 鉴权相关provider数据
 
-import { useHttp } from "hooks/useHttp";
 import { UserProps } from "pages/project-list/search-panel";
 
 const localStorageKey = "__auth_provider_token__";
 
 export const getToken = () => window.localStorage.getItem(localStorageKey);
 
-export const handleUserResponse = (user: UserProps) => {
+export const handleUserResponse = ({ user }: { user: UserProps }) => {
   window.localStorage.setItem(localStorageKey, user.token || "");
   return user;
 };
@@ -16,7 +15,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 export const login = (data: { username: string; password: string }) => {
   return fetch(`${baseUrl}/login`, {
-    method: "post",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },

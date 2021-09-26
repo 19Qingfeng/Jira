@@ -15,14 +15,15 @@ export const http = async (
   const requestData = {
     method: "GET",
     headers: {
-      Authorization: token ? "Bearer" + token : "",
+      Authorization: token ? "Bearer " + token : "",
       "Content-Type": data ? "application/json" : "",
     },
     ...config,
   };
 
   if (requestData.method.toUpperCase() === "GET") {
-    endPoint += `?${new URLSearchParams(data).toString()}`;
+    const query = new URLSearchParams(data).toString();
+    endPoint += query ? `?${new URLSearchParams(data).toString()}` : "";
   } else {
     requestData.body = JSON.stringify(data || {});
   }
@@ -31,7 +32,7 @@ export const http = async (
     async (res) => {
       if (res.status === 401) {
         await logout();
-        window.location.reload();
+        // window.location.reload();
         return Promise.reject({ message: "请重新登录" });
       }
       if (res.ok) {

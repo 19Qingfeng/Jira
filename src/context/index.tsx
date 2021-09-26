@@ -28,7 +28,6 @@ const bootstrapUser = async () => {
     const responseData = await http("/me", {
       token,
     });
-    console.log(responseData, "responseData");
     user = (responseData as any).user;
   }
   return user;
