@@ -34,7 +34,7 @@ const ProjectListScreen = () => {
 
   return (
     <div>
-      <List list={list} users={users}></List>
+      <List dataSource={list} users={users}></List>
       <SearchPanel
         params={params}
         users={users}

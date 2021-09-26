@@ -32,7 +32,7 @@ export const http = async (
     async (res) => {
       if (res.status === 401) {
         await logout();
-        // window.location.reload();
+        window.location.reload();
         return Promise.reject({ message: "请重新登录" });
       }
       if (res.ok) {
