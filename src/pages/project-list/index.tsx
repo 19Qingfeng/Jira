@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { List, ListItem } from "./list";
-import { SearchPanel, UserProps } from "./search-panel";
-import { cleanObj } from "pages/utils";
-import { useMount } from "../../hooks/useMount";
+import { useState } from "react";
+import { List } from "./list";
+import { SearchPanel } from "./search-panel";
 import { useDebounce } from "hooks/useDebounce";
-import { useHttp } from "hooks/useHttp";
+import { useProject } from "./use-project";
+import { useUser } from "./use-user";
 
 export interface SearchParams {
   name: string;
@@ -18,26 +17,15 @@ const ProjectListScreen = () => {
   });
   const paramsDebounce = useDebounce<SearchParams>(params);
 
-  const [list, setLists] = useState<ListItem[]>([]);
-  const [users, setUsers] = useState<UserProps[]>([]);
-  const client = useHttp();
-
-  useMount(() => {
-    client("/users").then().then(setUsers);
-  });
-
-  useEffect(() => {
-    client("/projects", {
-      data: cleanObj(params),
-    }).then(setLists);
-  }, [paramsDebounce]);
+  const { data: list } = useProject(paramsDebounce);
+  const { data: users } = useUser();
 
   return (
     <div>
-      <List dataSource={list} users={users}></List>
+      <List dataSource={list || []} users={users || []}></List>
       <SearchPanel
         params={params}
-        users={users}
+        users={users || []}
         setParams={setParams}
       ></SearchPanel>
     </div>
